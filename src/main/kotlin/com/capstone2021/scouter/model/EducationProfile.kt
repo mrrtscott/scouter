@@ -3,10 +3,7 @@ package com.capstone2021.scouter.model
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 class EducationProfile {
@@ -14,13 +11,24 @@ class EducationProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0
+    private var id: Long = 0
 
     @CreationTimestamp
-    var createdDate: Date? = null
+    private var createdDate: Date? = null
 
     @UpdateTimestamp
-    var updateDate: Date? = null
+    private var updateDate: Date? = null
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinTable(
+        name = "educationProfile_address",
+        joinColumns = [javax.persistence.JoinColumn(name = "educationProfileId", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "educationId", referencedColumnName = "id")]
+    )
+    private var listOfEducation: List<Education>? = null
+
+
+
 
 
 
