@@ -15,6 +15,7 @@ class Employment {
 
     private var placeOfEmployment: String? = null
 
+    @Enumerated(EnumType.STRING)
     private var employmentType: EmploymentType? = null
 
     private var employmentStartDate: Date? = null

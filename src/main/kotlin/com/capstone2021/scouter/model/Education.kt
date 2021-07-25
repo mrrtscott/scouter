@@ -1,10 +1,7 @@
 package com.capstone2021.scouter.model
 
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 class Education {
@@ -17,6 +14,7 @@ class Education {
 
     private var institution: String? = null
 
+    @Enumerated(EnumType.STRING)
     private var attainment: EducationAttainment? = null
 
     private var startDate: Date? = null

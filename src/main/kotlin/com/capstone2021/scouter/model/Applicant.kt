@@ -72,7 +72,6 @@ class Applicant {
         nationality: String?,
         taxRegistrationNumber: String?,
         applicantAddress: List<ApplicantAddress>?,
-        applicantStatus: ApplicantStatus?,
         employmentProfile: EmploymentProfile?,
         eductionProfile: EducationProfile?
     ) {
@@ -83,7 +82,7 @@ class Applicant {
         this.nationality = nationality
         this.taxRegistrationNumber = taxRegistrationNumber
         this.applicantAddress = applicantAddress
-        this.applicantStatus = applicantStatus
+        this.applicantStatus = ApplicantStatus.PENDING
         this.employmentProfile = employmentProfile
         this.eductionProfile = eductionProfile
     }
