@@ -4,7 +4,9 @@ import com.capstone2021.scouter.model.Applicant
 import com.capstone2021.scouter.repository.ApplicantRepository
 import com.capstone2021.scouter.service.ApplicantService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
+@Service
 class ApplicantServiceImplementation : ApplicantService {
 
     @Autowired
