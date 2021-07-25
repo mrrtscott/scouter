@@ -65,6 +65,31 @@ class Education {
 
 
 
+    fun setLevel(educationLevel: EducationLevel){
+        this.level = educationLevel
+    }
+
+    fun setInstitution(institution: String?){
+        this.institution = institution
+    }
+
+    fun setAttainment(educationAttainment: EducationAttainment){
+        this.attainment = educationAttainment
+    }
+
+    fun setStartDate(startDate: Date?){
+        this.startDate = startDate
+    }
+
+    fun setEndDate(endDate: Date?){
+        this.endDate = endDate
+    }
+
+
+
+
+
+
 
 
 

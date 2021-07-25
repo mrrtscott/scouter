@@ -29,6 +29,23 @@ class EducationProfile {
     private var listOfEducation: List<Education>? = null
 
 
+    fun getId(): Long?{
+        return this.id
+    }
+
+    fun getListOfEducation(): List<Education>?{
+        return this.listOfEducation
+    }
+
+    fun getCreatedDate(): Date?{
+        return this.createdDate
+    }
+
+    fun getUpdateDate(): Date?{
+        return this.updateDate
+    }
+
+
 
 
 
