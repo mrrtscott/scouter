@@ -11,15 +11,47 @@ class Employment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0
+    private var id: Long? = null
 
-    var placeOfEmployment: String? = null
+    private var placeOfEmployment: String? = null
 
-    var employmentType: EmploymentType? = null
+    private var employmentType: EmploymentType? = null
 
-    var employmentStartDate: Date? = null
+    private var employmentStartDate: Date? = null
 
-    var employmentEndDate: Date? = null
+    private var employmentEndDate: Date? = null
+
+    private var remarks: String? = null
+
+    constructor(
+        placeOfEmployment: String?,
+        employmentType: EmploymentType?,
+        employmentStartDate: Date?,
+        employmentEndDate: Date?,
+        remarks: String?
+    ) {
+        this.placeOfEmployment = placeOfEmployment
+        this.employmentType = employmentType
+        this.employmentStartDate = employmentStartDate
+        this.employmentEndDate = employmentEndDate
+        this.remarks = remarks
+    }
+
+    fun getPlaceOfEmployment(): String?{
+        return this.placeOfEmployment
+    }
+
+    fun getEmploymentType(): EmploymentType?{
+        return this.employmentType
+    }
+
+    fun getEmploymentStartDate(): Date?{
+        return this.employmentStartDate
+    }
+
+    fun getEmploymentEndDate(): Date?{
+        return this.employmentEndDate
+    }
 
 
 

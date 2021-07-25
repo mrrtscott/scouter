@@ -28,6 +28,10 @@ class EducationProfile {
     )
     private var listOfEducation: List<Education>? = null
 
+    constructor(listOfEducation: List<Education>?) {
+        this.listOfEducation = listOfEducation
+    }
+
 
     fun getId(): Long?{
         return this.id

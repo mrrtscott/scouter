@@ -12,7 +12,7 @@ class EmploymentProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var id: Long = 0
+    private var id: Long? = null
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -32,5 +32,32 @@ class EmploymentProfile {
 
 
     private var employmentStatus: EmploymentStatus? = null
+
+
+    constructor(listOfEmployment: List<Employment>?, employmentStatus: EmploymentStatus?) {
+        this.listOfEmployment = listOfEmployment
+        this.employmentStatus = employmentStatus
+    }
+
+
+    fun getId(): Long?{
+        return this.id
+    }
+
+    fun getCreatedDate(): Date?{
+        return this.createdDate
+    }
+
+    fun getUpdateDate(): Date?{
+        return this.updateDate
+    }
+
+    fun getEmploymentStatus(): EmploymentStatus?{
+        return this.employmentStatus
+    }
+
+    fun getListOfEmployment(): List<Employment>?{
+        return this.listOfEmployment
+    }
 
 }
