@@ -145,6 +145,47 @@ class Applicant {
 
 
 
+    fun setFirstName (firstName: String?){
+         this.firstName = firstName
+    }
+
+    fun setMiddleName(middleName: String?) {
+        this.middleName = middleName
+    }
+
+    fun setLastName(lastName: String?) {
+        this.lastName = lastName
+    }
+
+    fun setDateOfBirth(dateOfBirth: Date?){
+        this.dateOfBirth = dateOfBirth
+    }
+
+    fun setNationality(nationality: String?) {
+        this.nationality = nationality
+    }
+
+    fun setTaxRegistrationNumber(taxRegistrationNumber: String?){
+        this.taxRegistrationNumber =taxRegistrationNumber
+    }
+
+
+    fun setApplicantStatus(applicantStatus: ApplicantStatus?){
+        this.applicantStatus = applicantStatus
+    }
+
+    fun setEmploymentProfile(employmentProfile: EmploymentProfile?){
+        this.employmentProfile = employmentProfile
+    }
+
+    fun setEductionProfile(eductionProfile: EducationProfile?){
+        this.eductionProfile = eductionProfile
+    }
+
+
+
+
+
 
 
 
