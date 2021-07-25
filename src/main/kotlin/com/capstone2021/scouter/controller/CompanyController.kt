@@ -36,4 +36,11 @@ class CompanyController {
     }
 
 
+    @DeleteMapping(value = ["/{id}"])
+    @ResponseStatus(HttpStatus.OK)
+    fun delete(@PathVariable("id") id: Long) {
+        companyService.deleteById(id)
+    }
+
+
 }

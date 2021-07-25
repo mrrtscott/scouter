@@ -21,7 +21,7 @@ class EducationProfile {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinTable(
-        name = "educationProfile_address",
+        name = "educationProfile_listOfEdu",
         joinColumns = [javax.persistence.JoinColumn(name = "educationProfileId", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "educationId", referencedColumnName = "id")]
     )

@@ -14,5 +14,7 @@ interface CompanyService {
 
     fun countCompany(): Long
 
+    fun deleteById(id: Long)
+
 
 }

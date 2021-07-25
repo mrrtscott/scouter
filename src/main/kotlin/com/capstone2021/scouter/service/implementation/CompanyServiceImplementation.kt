@@ -31,5 +31,9 @@ class CompanyServiceImplementation : CompanyService {
         return this.companyRepository.count()
     }
 
+    override fun deleteById(id: Long) {
+        this.companyRepository.deleteById(id)
+    }
+
 
 }
