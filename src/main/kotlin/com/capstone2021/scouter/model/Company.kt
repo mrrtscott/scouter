@@ -1,8 +1,11 @@
 package com.capstone2021.scouter.model
 
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
 import org.jetbrains.annotations.NotNull
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
+import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -30,9 +33,14 @@ class Company {
 
     @NotNull
     @Column(name = "taxRegistrationNumber", unique = true)
-    var taxRegistrationNumber: String? = null
+    private var taxRegistrationNumber: String? = null
 
-    var createdAt: LocalDateTime? = LocalDateTime.now()
+    @CreationTimestamp
+    @Column(updatable = false)
+    private var createdAt: LocalDateTime? = LocalDateTime.now()
+
+    @UpdateTimestamp
+    private var updatedAt: LocalDateTime? = null
 
 
 
@@ -67,12 +75,20 @@ class Company {
         return this.companyAddress
     }
 
-    fun getTaxRegistrationNum(): String? {
+    fun getTaxRegistrationNumber(): String? {
         return this.taxRegistrationNumber
     }
 
     fun setTaxRegistrationNum(trn: String){
         this.taxRegistrationNumber = trn
+    }
+
+    fun getCreatedAt(): LocalDateTime?{
+        return this.createdAt
+    }
+
+    fun getUpdatedAt(): LocalDateTime?{
+        return this.updatedAt
     }
 
 

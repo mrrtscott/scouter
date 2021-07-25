@@ -11,9 +11,10 @@ class EducationProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var id: Long = 0
+    private var id: Long? = null
 
     @CreationTimestamp
+    @Column(updatable = false)
     private var createdDate: Date? = null
 
     @UpdateTimestamp
