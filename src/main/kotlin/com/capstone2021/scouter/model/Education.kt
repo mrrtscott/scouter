@@ -22,6 +22,7 @@ class Education {
     var attainment: EducationAttainment? = null
 
     var startDate: Date? = null
+
     var endDate: Date? = null
 
 

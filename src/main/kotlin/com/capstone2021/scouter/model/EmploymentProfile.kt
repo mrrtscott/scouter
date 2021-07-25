@@ -15,10 +15,12 @@ class EmploymentProfile {
     private var id: Long = 0
 
     @CreationTimestamp
+    @Column(updatable = false)
     private var createdDate: Date? = null
 
     @UpdateTimestamp
     private var updateDate: Date? = null
+
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinTable(

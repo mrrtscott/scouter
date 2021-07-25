@@ -30,8 +30,14 @@ class Applicant {
     @Column(unique = true)
     var taxRegistrationNumber: String? = null
 
+
+    @OneToOne(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "employmentProfileId", referencedColumnName = "id")
     var employmentProfile: EmploymentProfile? = null
 
+
+    @OneToOne(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "educationProfileId", referencedColumnName = "id")
     var eductionProfile: EducationProfile? = null
 
 
