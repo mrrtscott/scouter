@@ -27,5 +27,9 @@ class CompanyServiceImplementation : CompanyService {
         return this.companyRepository.getById(id)
     }
 
+    override fun countCompany(): Long {
+        return this.companyRepository.count()
+    }
+
 
 }

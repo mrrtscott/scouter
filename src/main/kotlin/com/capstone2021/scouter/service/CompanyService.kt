@@ -12,5 +12,7 @@ interface CompanyService {
 
     fun findCompany(id: Long): Company
 
+    fun countCompany(): Long
+
 
 }

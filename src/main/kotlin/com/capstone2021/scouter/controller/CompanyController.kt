@@ -30,5 +30,10 @@ class CompanyController {
         return companyService.findCompany(id)
     }
 
+    @GetMapping(value = ["/count"])
+    fun count() :Long? {
+        return companyService.countCompany()
+    }
+
 
 }
