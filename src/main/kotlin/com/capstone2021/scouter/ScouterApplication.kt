@@ -8,4 +8,6 @@ class ScouterApplication
 
 fun main(args: Array<String>) {
 	runApplication<ScouterApplication>(*args)
+
+
 }

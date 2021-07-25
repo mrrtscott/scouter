@@ -22,7 +22,7 @@ class Company {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinTable(
-        name = "company_address",
+        name = "company_addresses",
         joinColumns = [javax.persistence.JoinColumn(name = "companyId", referencedColumnName = "companyId")],
         inverseJoinColumns = [JoinColumn(name = "address_id", referencedColumnName = "id")]
     )

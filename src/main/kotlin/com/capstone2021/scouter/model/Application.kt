@@ -27,6 +27,9 @@ class Application {
     private var applicant: Applicant? = null
 
 
+    private var score: Double? = null
+
+
 
 
 
