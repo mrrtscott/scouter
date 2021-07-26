@@ -1,8 +1,8 @@
 package com.capstone2021.scouter.model
 
 import com.capstone2021.scouter.model.enum.ApplicantAddressType
-import java.awt.desktop.AppReopenedListener
 import javax.persistence.*
+
 
 
 @Entity
