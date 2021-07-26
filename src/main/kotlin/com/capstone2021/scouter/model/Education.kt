@@ -10,6 +10,7 @@ class Education {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private var id: Long? = null
 
+    @Enumerated(EnumType.STRING)
     private var level: EducationLevel? = null
 
     private var institution: String? = null

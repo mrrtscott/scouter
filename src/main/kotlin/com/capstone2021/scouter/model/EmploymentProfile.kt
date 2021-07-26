@@ -31,6 +31,7 @@ class EmploymentProfile {
     private var listOfEmployment: List<Employment>? = null
 
 
+    @Enumerated(EnumType.STRING)
     private var employmentStatus: EmploymentStatus? = null
 
 
