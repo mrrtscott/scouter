@@ -70,4 +70,8 @@ class ApplicantAddress {
         return this.country
     }
 
+    /*
+
+     */
+
 }
