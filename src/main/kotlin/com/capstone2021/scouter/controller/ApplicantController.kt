@@ -15,6 +15,9 @@ class ApplicantController {
     @Autowired
     lateinit var applicantService: ApplicantService
 
+    /**
+     *
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody applicant:Applicant){
