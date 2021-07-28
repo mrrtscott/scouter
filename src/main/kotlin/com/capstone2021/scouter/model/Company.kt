@@ -35,6 +35,18 @@ class Company {
     @Column(name = "taxRegistrationNumber", unique = true)
     private var taxRegistrationNumber: String? = null
 
+    private var logo: String? = null
+
+    private var headOfCompany: String? = null
+
+    private var isPublicCompany: String? = null
+
+    private var companyEstablishedDate: Date? = null
+
+    private var website: String? = null
+
+    private var email: String? = null
+
     @CreationTimestamp
     @Column(updatable = false)
     private var createdAt: LocalDateTime? = LocalDateTime.now()
