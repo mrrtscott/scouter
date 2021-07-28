@@ -35,11 +35,12 @@ class Company {
     @Column(name = "taxRegistrationNumber", unique = true)
     private var taxRegistrationNumber: String? = null
 
+
     private var logo: String? = null
 
     private var headOfCompany: String? = null
 
-    private var isPublicCompany: String? = null
+    private var isPublicCompany: Boolean? = null
 
     private var companyEstablishedDate: Date? = null
 
@@ -53,7 +54,6 @@ class Company {
 
     @UpdateTimestamp
     private var updatedAt: LocalDateTime? = null
-
 
 
     fun getId (): Long?{
@@ -101,6 +101,31 @@ class Company {
 
     fun getUpdatedAt(): LocalDateTime?{
         return this.updatedAt
+    }
+
+    fun getLogo(): String?{
+        return this.logo
+    }
+
+    fun getHeadOfCompany(): String?{
+        return this.headOfCompany
+    }
+
+    fun getIsPublicCompany(): Boolean?{
+        return this.isPublicCompany
+    }
+
+    fun getCompanyEstablishedDate(): Date?{
+        return this.companyEstablishedDate
+    }
+
+
+    fun getWebsite (): String?{
+        return this.website
+    }
+
+    fun getEmail(): String?{
+        return this.email
     }
 
 
