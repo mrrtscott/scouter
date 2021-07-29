@@ -35,7 +35,6 @@ class Company {
     @Column(name = "taxRegistrationNumber", unique = true)
     private var taxRegistrationNumber: String? = null
 
-
     private var logo: String? = null
 
     private var headOfCompany: String? = null
