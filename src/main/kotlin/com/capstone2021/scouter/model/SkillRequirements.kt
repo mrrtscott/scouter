@@ -27,4 +27,38 @@ class SkillRequirements {
     private var updateDate: Date? = null
 
 
+    constructor(description: String?, skill: String?, isRequired: Boolean?) {
+        this.description = description
+        this.skill = skill
+        this.isRequired = isRequired
+    }
+
+    fun getId(): Long?{
+        return this.id
+    }
+
+    fun getDescription(): String?{
+        return this.description
+    }
+
+    fun getSkill(): String?{
+        return this.skill
+    }
+
+    fun getIsRequired(): String?{
+        return this.skill
+    }
+
+    fun getCreatedDate(): Date?{
+        return this.createdDate
+    }
+
+    fun getUpdated(): Date?{
+        return this.updateDate
+    }
+
+
+
+
+
 }
