@@ -12,4 +12,6 @@ interface ApplicantService {
 
     fun countApplicant(): Long
 
+
+
 }

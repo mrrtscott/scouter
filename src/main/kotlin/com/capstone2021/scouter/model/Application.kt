@@ -8,9 +8,22 @@ import javax.persistence.*
 @Entity
 class Application {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var id: Long = 0
+    private var id:Long?=null
+
+    @ManyToOne(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "jobPost_id", referencedColumnName = "id")
+    private var job: JobPosting? = null
+
+
+    @ManyToOne(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "applicantId", referencedColumnName = "id")
+    private var applicant: Applicant? = null
+
+    private var score: Double? = null
+
 
     @CreationTimestamp
     private var dateCreated: Date? = null
@@ -18,16 +31,34 @@ class Application {
     @UpdateTimestamp
     private var dateUpdated: Date? = null
 
-    @OneToOne(cascade = [CascadeType.ALL])
-    @JoinColumn(name = "jobPost_id", referencedColumnName = "id")
-    private var job: JobPosting? = null
 
-    @OneToOne(cascade = [CascadeType.ALL])
-    @JoinColumn(name = "applicantId", referencedColumnName = "id")
-    private var applicant: Applicant? = null
+    fun getJob (): JobPosting?{
+        return this.job
+    }
 
+    fun getApplicant(): Applicant?{
+        return this.applicant
+    }
 
-    private var score: Double? = null
+    fun getScore(): Double?{
+        return this.score
+    }
+
+    fun getDateCreated(): Date?{
+        return this.dateCreated
+    }
+
+    fun getDateUpdated(): Date?{
+        return this.dateUpdated
+    }
+
+    fun setJob(job: JobPosting){
+        this.job = job
+    }
+
+    fun setApplicant(applicant: Applicant) {
+        this.applicant = applicant
+    }
 
 
 

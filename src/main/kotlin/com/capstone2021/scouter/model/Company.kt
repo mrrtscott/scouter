@@ -47,12 +47,45 @@ class Company {
 
     private var email: String? = null
 
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinTable(
+        name = "company_jobPosting",
+        joinColumns = [javax.persistence.JoinColumn(name = "companyId", referencedColumnName = "companyId")],
+        inverseJoinColumns = [JoinColumn(name = "jobPost_id", referencedColumnName = "id")]
+    )
+    private var jobPostings: MutableList<JobPosting>? = null
+
     @CreationTimestamp
     @Column(updatable = false)
     private var createdAt: LocalDateTime? = LocalDateTime.now()
 
     @UpdateTimestamp
     private var updatedAt: LocalDateTime? = null
+
+    constructor(
+        companyName: String?,
+        companySize: CompanySize?,
+        companyAddress: List<CompanyAddress>?,
+        taxRegistrationNumber: String?,
+        logo: String?,
+        headOfCompany: String?,
+        isPublicCompany: Boolean?,
+        companyEstablishedDate: Date?,
+        website: String?,
+        email: String?
+    ) {
+        this.companyName = companyName
+        this.companySize = companySize
+        this.companyAddress = companyAddress
+        this.taxRegistrationNumber = taxRegistrationNumber
+        this.logo = logo
+        this.headOfCompany = headOfCompany
+        this.isPublicCompany = isPublicCompany
+        this.companyEstablishedDate = companyEstablishedDate
+        this.website = website
+        this.email = email
+    }
 
 
     fun getId (): Long?{
@@ -126,6 +159,16 @@ class Company {
     fun getEmail(): String?{
         return this.email
     }
+
+    fun getJobPostings(): List<JobPosting>?{
+        return this.jobPostings
+    }
+
+    fun addJobPosting(jobPosting: JobPosting){
+        jobPostings?.add(jobPosting)
+    }
+
+
 
 
 

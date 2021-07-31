@@ -13,11 +13,8 @@ class JobPosting {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(updatable = false)
     private var id: Long? = null
-
-    @ManyToOne(cascade = [CascadeType.ALL])
-    @JoinColumn(name = "companyId", referencedColumnName = "companyId")
-    private var company: Company? = null
 
     private var description: String? = null
 
@@ -41,6 +38,12 @@ class JobPosting {
     )
     private var educationRequirements: List<EducationRequirement>? = null
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinTable(
+        name = "jobPosting_employmentRequirement",
+        joinColumns = [javax.persistence.JoinColumn(name = "jobPosting_id", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "employmentRequirement_id", referencedColumnName = "id")]
+    )
     private var employmentRequirements: List<EmploymentRequirement>? = null
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
@@ -59,4 +62,138 @@ class JobPosting {
 
     @UpdateTimestamp
     private var updatedAt: Date? = null
+
+
+    fun getId(): Long?{
+        return this.id
+    }
+
+    fun getDescription (): String?{
+        return this.description
+    }
+
+    fun getPosition(): String?{
+        return this.position
+    }
+
+    fun getEmploymentType():EmploymentType?{
+        return this.employmentType
+    }
+
+    fun getDuration(): Double?{
+        return this.duration
+    }
+
+    fun getBasicYearlySalary (): Double?{
+        return this.basicYearlySalary
+    }
+
+    fun getMinAge(): Int?{
+        return this.minAge
+    }
+
+    fun getMaxAge(): Int?{
+        return this.maxAge
+    }
+
+    fun getEducationRequirements(): List<EducationRequirement>?{
+        return this.educationRequirements
+    }
+
+    fun getEmploymentRequirements(): List<EmploymentRequirement>?{
+        return this.employmentRequirements
+    }
+
+    fun getSkillRequirements(): List<SkillRequirements>?{
+        return this.skillRequirements
+    }
+
+    fun getUpdatedAt(): Date?{
+        return this.updatedAt
+    }
+
+    fun getCreatedAt(): LocalDateTime?{
+        return this.createdAt
+    }
+
+
+
+
+
+    fun setDescription (description :String?){
+        this.description = description
+    }
+
+    fun setPosition(position: String?){
+         this.position = position
+    }
+
+    fun setEmploymentType(employmentType: EmploymentType?){
+        this.employmentType = employmentType
+    }
+
+    fun setDuration(duration: Double?){
+        this.duration = duration
+    }
+
+    fun setBasicYearlySalary (basicYearlySalary: Double?){
+        this.basicYearlySalary = basicYearlySalary
+    }
+
+    fun setMinAge(minAge: Int?){
+        this.minAge = minAge
+    }
+
+    fun setMaxAge(): Int?{
+        return this.maxAge
+    }
+
+    fun setEducationRequirements(): List<EducationRequirement>?{
+        return this.educationRequirements
+    }
+
+    fun setEmploymentRequirements(): List<EmploymentRequirement>?{
+        return this.employmentRequirements
+    }
+
+    fun setSkillRequirements(): List<SkillRequirements>?{
+        return this.skillRequirements
+    }
+
+
+
+
+
+    constructor(
+        description: String?,
+        position: String?,
+        employmentType: EmploymentType?,
+        duration: Double?,
+        basicYearlySalary: Double?,
+        minAge: Int?,
+        maxAge: Int?,
+        educationRequirements: List<EducationRequirement>?,
+        employmentRequirements: List<EmploymentRequirement>?,
+        skillRequirements: List<SkillRequirements>?,
+        jobPostingStatus: JobPostingStatus?
+    ) {
+        this.description = description
+        this.position = position
+        this.employmentType = employmentType
+        this.duration = duration
+        this.basicYearlySalary = basicYearlySalary
+        this.minAge = minAge
+        this.maxAge = maxAge
+        this.educationRequirements = educationRequirements
+        this.employmentRequirements = employmentRequirements
+        this.skillRequirements = skillRequirements
+        this.jobPostingStatus = jobPostingStatus
+    }
+
+
+
+
+
+
+
 }
