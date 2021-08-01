@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ApplicantRepository: JpaRepository<Applicant, Long> {
 
+    @Query(value = "SELECT a FROM Applicant a WHERE a.id = ?1 OR a.id = ?2")
+    fun getSpecificApplicants(applicant1: Long, applicant2: Long): List<Applicant>
+
 
 
 

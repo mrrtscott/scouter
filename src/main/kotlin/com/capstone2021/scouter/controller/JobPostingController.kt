@@ -40,10 +40,9 @@ class JobPostingController {
     @PutMapping(value = ["/{companyId}/{jobPostId}"])
     @ResponseStatus(HttpStatus.OK)
     fun update(@PathVariable("companyId") companyId: Long?, @PathVariable ("jobPostId") jobPostId:Long , @RequestBody jobPosting: JobPosting){
-        if(jobPosting != null){
-            var activeCompany: Company = companyService.findCompany(companyId!!.toLong())
-            var activeJobPosting  = jobPostingService.findJobPost(jobPostId)
-            jobPostingService.saveJobPost(activeCompany, activeJobPosting)
+        var subJob: JobPosting = jobPostingService.findJobPost(jobPostId)
+        if(jobPosting != null && subJob != null){
+            jobPostingService.updateJobPost(jobPosting)
         }
 
     }

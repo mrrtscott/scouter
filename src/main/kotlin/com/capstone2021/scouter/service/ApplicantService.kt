@@ -12,6 +12,10 @@ interface ApplicantService {
 
     fun countApplicant(): Long
 
+    fun getTwoApplicant(applicant1: Long, applicant2: Long): List<Applicant>?
+
+    fun getQualifiedJobs(applicant: Applicant)
+
 
 
 }

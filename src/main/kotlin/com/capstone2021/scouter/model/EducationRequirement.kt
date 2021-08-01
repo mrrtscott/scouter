@@ -25,6 +25,31 @@ class EducationRequirement {
 
 
 
+    fun getId(): Long?{
+        return this.id
+    }
+
+    fun getDescription(): String?{
+        return this.description
+    }
+
+    fun getRequiredAttainment(): EducationAttainment?{
+        return this.requiredAttainment
+    }
+
+    fun getCreatedDate(): Date?{
+        return this.createdDate
+    }
+
+    fun getUpdateDate(): Date?{
+        return this.updateDate
+    }
+
+    constructor(description: String?, requiredAttainment: EducationAttainment?) {
+        this.description = description
+        this.requiredAttainment = requiredAttainment
+    }
+
 
 
 }

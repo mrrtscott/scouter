@@ -1,6 +1,9 @@
 package com.capstone2021.scouter.controller
 
+import com.capstone2021.scouter.algorithms.CompareStrings
+import com.capstone2021.scouter.algorithms.Cosine
 import com.capstone2021.scouter.model.Applicant
+import com.capstone2021.scouter.model.Application
 import com.capstone2021.scouter.model.Company
 import com.capstone2021.scouter.service.ApplicantService
 import org.springframework.beans.factory.annotation.Autowired
@@ -40,6 +43,27 @@ class ApplicantController {
     @GetMapping(value = ["/{id}"])
     fun findById(@PathVariable("id") id: Long): Applicant? {
         return applicantService.findApplicant(id)
+    }
+
+    @GetMapping("/compare")
+    fun findApplication(@RequestParam(name = "applicant1" ) applicant1:Long, @RequestParam(name = "applicant2")applicant2: Long): List<Applicant>?{
+        var output: List<Applicant>? = null
+        output = applicantService.getTwoApplicant(applicant1, applicant2)
+        return output
+    }
+
+    @GetMapping("/word")
+    fun viewJobsQualifiedFor(@RequestParam(name = "word1") word1: String?,@RequestParam(name = "word2") word2: String? ):Double{
+        var compareStrings = CompareStrings()
+        var cosine = Cosine()
+
+        //Should be greater than 0.40
+        //return cosine.similarity(word1.toString(), word2.toString())
+
+
+        return (compareStrings.calculate(word1.toString(), word2.toString())).toDouble()
+
+
     }
 
 

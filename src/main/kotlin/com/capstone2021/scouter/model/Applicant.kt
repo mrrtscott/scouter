@@ -55,6 +55,14 @@ class Applicant {
     @JoinColumn(name = "educationProfileId", referencedColumnName = "id")
     private var eductionProfile: EducationProfile? = null
 
+    //NEED TO ADD
+    //minimum salary
+    //job type seeking
+
+    @OneToOne(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "prospectiveJobId", referencedColumnName = "id")
+    private var prospectiveJob: ProspectiveJob? = null
+
     @CreationTimestamp
     @Column(updatable = false)
     private var createdAt: LocalDateTime? = LocalDateTime.now()

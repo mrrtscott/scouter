@@ -45,8 +45,8 @@ class SkillRequirements {
         return this.skill
     }
 
-    fun getIsRequired(): String?{
-        return this.skill
+    fun getIsRequired(): Boolean?{
+        return this.isRequired
     }
 
     fun getCreatedDate(): Date?{

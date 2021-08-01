@@ -20,6 +20,7 @@ class JobPosting {
 
     private var position: String? = null
 
+    @Enumerated(EnumType.STRING)
     private var employmentType:EmploymentType? = null
 
     private var duration: Double? = null
@@ -54,6 +55,7 @@ class JobPosting {
     )
     private var skillRequirements: List<SkillRequirements>? = null
 
+    @Enumerated(EnumType.STRING)
     private var jobPostingStatus: JobPostingStatus? = null
 
     @CreationTimestamp
@@ -144,20 +146,20 @@ class JobPosting {
         this.minAge = minAge
     }
 
-    fun setMaxAge(): Int?{
-        return this.maxAge
+    fun setMaxAge(maxAge: Int?){
+        this.maxAge = maxAge
     }
 
-    fun setEducationRequirements(): List<EducationRequirement>?{
-        return this.educationRequirements
+    fun setEducationRequirements(educationRequirements: List<EducationRequirement>?){
+        this.educationRequirements = educationRequirements
     }
 
-    fun setEmploymentRequirements(): List<EmploymentRequirement>?{
-        return this.employmentRequirements
+    fun setEmploymentRequirements(employmentRequirements: List<EmploymentRequirement>?){
+        this.employmentRequirements = employmentRequirements
     }
 
-    fun setSkillRequirements(): List<SkillRequirements>?{
-        return this.skillRequirements
+    fun setSkillRequirements(skillRequirements: List<SkillRequirements>?){
+        this.skillRequirements = skillRequirements
     }
 
 

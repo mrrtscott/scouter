@@ -7,6 +7,8 @@ interface JobPostService {
 
     fun saveJobPost(company: Company, jobPost: JobPosting)
 
+    fun updateJobPost(jobPost: JobPosting)
+
     fun findAll(): List<JobPosting>?
 
     fun findJobPost(id: Long): JobPosting

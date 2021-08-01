@@ -24,6 +24,11 @@ class JobPostServiceImplementation: JobPostService {
         companyRepository.save(activeCompany)
     }
 
+    override fun updateJobPost(jobPost: JobPosting) {
+            jobPostRepository.save(jobPost)
+    }
+
+
     override fun findAll(): List<JobPosting>? {
         return jobPostRepository.findAll()
     }
@@ -31,6 +36,7 @@ class JobPostServiceImplementation: JobPostService {
     override fun findJobPost(id: Long): JobPosting {
         return this.jobPostRepository.getById(id)
     }
+
 
 
 }
