@@ -5,6 +5,7 @@ import com.capstone2021.scouter.algorithms.Cosine
 import com.capstone2021.scouter.model.Applicant
 import com.capstone2021.scouter.model.Application
 import com.capstone2021.scouter.model.Company
+import com.capstone2021.scouter.model.JobPosting
 import com.capstone2021.scouter.service.ApplicantService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -50,6 +51,20 @@ class ApplicantController {
         var output: List<Applicant>? = null
         output = applicantService.getTwoApplicant(applicant1, applicant2)
         return output
+    }
+
+    @GetMapping("/dashboard/{id}")
+    fun applicantDashboard(@PathVariable("id") id: Long?): List<JobPosting>?{
+        var jobPostings:List<JobPosting>? = null
+        var applicant = applicantService.findApplicant(id!!.toLong())
+
+        if (applicant != null) {
+            jobPostings =  applicantService.getQualifiedJobs(applicant)
+        }
+
+        return jobPostings
+
+
     }
 
     @GetMapping("/word")

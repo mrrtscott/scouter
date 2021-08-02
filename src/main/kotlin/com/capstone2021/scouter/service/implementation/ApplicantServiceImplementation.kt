@@ -66,6 +66,27 @@ class ApplicantServiceImplementation : ApplicantService {
                 continue
             }
 
+            var skillCount = 0
+            var jobPostingSkills = job.getSkillRequirements()
+
+            if (jobPostingSkills != null) {
+                for (skill in jobPostingSkills){
+                    for (applicantSkill in applicant.getSkillList()){
+                        if(functions.matcher(skill.getSkill(), applicantSkill)){
+                            skillCount+=1
+                        }
+                    }
+
+                }
+
+            }
+            println(skillCount)
+
+            if (skillCount == 0){
+                allPostedJobs.remove(job)
+                continue
+
+            }
 
 
         }
