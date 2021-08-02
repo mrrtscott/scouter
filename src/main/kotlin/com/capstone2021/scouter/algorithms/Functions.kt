@@ -5,6 +5,9 @@ import java.util.*
 
 class Functions {
 
+    var cosine = Cosine()
+    var compareStrings = CompareStrings()
+
     fun getAge(dateOfBirth: Date?): Int {
         val today = Calendar.getInstance()
         val birthDate = Calendar.getInstance()
@@ -30,4 +33,14 @@ class Functions {
         }
         return age
     }
+
+    fun matcher(input1:String?, input2:String?): Boolean{
+        var result1:Double = cosine.similarity(input1, input2)
+        var result2: Int = compareStrings.calculate(input1.toString(), input2.toString())
+
+        return result1 >= 0.4 && result2 <= 60
+
+    }
+
+
 }

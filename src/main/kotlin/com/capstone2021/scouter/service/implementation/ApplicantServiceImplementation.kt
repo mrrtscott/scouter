@@ -8,7 +8,8 @@ import com.capstone2021.scouter.repository.JobPostRepository
 import com.capstone2021.scouter.service.ApplicantService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import sun.security.ec.point.ProjectivePoint
+import java.util.*
+
 
 @Service
 class ApplicantServiceImplementation : ApplicantService {
@@ -41,7 +42,7 @@ class ApplicantServiceImplementation : ApplicantService {
         return applicantRepository.getSpecificApplicants(applicant1, applicant2)
     }
 
-    override fun getQualifiedJobs(applicant: Applicant) {
+    override fun getQualifiedJobs(applicant: Applicant):List<JobPosting>? {
         var allPostedJobs: MutableList<JobPosting> = jobRepository.findAll()
 
         for (job in allPostedJobs){
@@ -53,6 +54,24 @@ class ApplicantServiceImplementation : ApplicantService {
                 allPostedJobs.remove(job)
                 continue
             }
+
+            if(job.getBasicYearlySalary()!! < applicant.getProspectiveJob()?.getMinimumSalary()!!){
+                allPostedJobs.remove(job)
+                continue
+            }
+
+
+            if(!functions.matcher(job.getPosition().toString().lowercase(Locale.getDefault()), applicant.getProspectiveJob().toString())){
+                allPostedJobs.remove(job)
+                continue
+            }
+
+
+
         }
+
+        return allPostedJobs
+
     }
+
 }

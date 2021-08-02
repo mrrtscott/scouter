@@ -8,6 +8,7 @@ import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
 
+
 @Entity
 @Table (name = "Applicant")
 class Applicant {
@@ -55,13 +56,11 @@ class Applicant {
     @JoinColumn(name = "educationProfileId", referencedColumnName = "id")
     private var eductionProfile: EducationProfile? = null
 
-    //NEED TO ADD
-    //minimum salary
-    //job type seeking
-
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "prospectiveJobId", referencedColumnName = "id")
     private var prospectiveJob: ProspectiveJob? = null
+
+    private var skillProfile: String? = null
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -81,7 +80,9 @@ class Applicant {
         taxRegistrationNumber: String?,
         applicantAddress: List<ApplicantAddress>?,
         employmentProfile: EmploymentProfile?,
-        eductionProfile: EducationProfile?
+        eductionProfile: EducationProfile?,
+        prospectiveJob:ProspectiveJob?,
+        skillProfile: String?
     ) {
         this.firstName = firstName
         this.middleName = middleName
@@ -93,6 +94,8 @@ class Applicant {
         this.applicantStatus = ApplicantStatus.PENDING
         this.employmentProfile = employmentProfile
         this.eductionProfile = eductionProfile
+        this.prospectiveJob = prospectiveJob
+        this.skillProfile = skillProfile
     }
 
 
@@ -139,6 +142,15 @@ class Applicant {
 
     fun getEductionProfile(): EducationProfile?{
         return this.eductionProfile
+    }
+
+    fun getProspectiveJob(): ProspectiveJob?{
+        return this.prospectiveJob
+    }
+
+    fun getSkillList(): List<String> {
+        return (skillProfile!!.split(","))
+
     }
 
     fun getCreatedAt(): LocalDateTime?{
@@ -188,6 +200,8 @@ class Applicant {
     fun setEductionProfile(eductionProfile: EducationProfile?){
         this.eductionProfile = eductionProfile
     }
+
+
 
 
 
