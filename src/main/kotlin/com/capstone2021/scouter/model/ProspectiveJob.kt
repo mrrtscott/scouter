@@ -1,15 +1,13 @@
 package com.capstone2021.scouter.model
 
 import com.capstone2021.scouter.model.enum.ProspectiveJobType
-import javax.persistence.Entity
-import javax.persistence.EnumType
-import javax.persistence.Enumerated
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 class ProspectiveJob {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private var id: Long? = null
 
     private var minimumSalary: Double? = null
