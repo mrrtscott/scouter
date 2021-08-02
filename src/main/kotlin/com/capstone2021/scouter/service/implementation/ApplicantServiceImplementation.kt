@@ -44,27 +44,34 @@ class ApplicantServiceImplementation : ApplicantService {
 
     override fun getQualifiedJobs(applicant: Applicant):List<JobPosting>? {
         var allPostedJobs: MutableList<JobPosting> = jobRepository.findAll()
+        var set: MutableSet<JobPosting>? = null
 
+
+        var jobCount = -1
         for (job in allPostedJobs){
             println("test")
+            jobCount+=1
             if(functions.getAge(applicant.getDateOfBirth()) < job.getMinAge()!!.toInt()){
-                allPostedJobs.remove(job)
-                continue
+                    set!!.add(job)
+
             }
             if(functions.getAge(applicant.getDateOfBirth()) > job.getMaxAge()!!.toInt()){
-                allPostedJobs.remove(job)
-                continue
+//                allPostedJobs.remove(job)
+//                continue
+                    set!!.add(job)
             }
 
             if(job.getBasicYearlySalary()!! < applicant.getProspectiveJob()?.getMinimumSalary()!!){
-                allPostedJobs.remove(job)
-                continue
+//                allPostedJobs.remove(job)
+//                continue
+                    set!!.add(job)
             }
 
 
             if(!functions.matcher(job.getPosition().toString().lowercase(Locale.getDefault()), applicant.getProspectiveJob().toString())){
-                allPostedJobs.remove(job)
-                continue
+//                allPostedJobs.remove(job)
+//                continue
+                set!!.add(job)
             }
 
             var skillCount = 0
@@ -84,13 +91,17 @@ class ApplicantServiceImplementation : ApplicantService {
             println(skillCount)
 
             if (skillCount == 0){
-                allPostedJobs.remove(job)
-                continue
+                set!!.add(job)
 
             }
 
 
         }
+
+        if (set != null) {
+            allPostedJobs.removeAll(set)
+        }
+
 
         return allPostedJobs
 
