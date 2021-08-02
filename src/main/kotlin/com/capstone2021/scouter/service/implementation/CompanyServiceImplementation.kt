@@ -35,5 +35,9 @@ class CompanyServiceImplementation : CompanyService {
         this.companyRepository.deleteById(id)
     }
 
+    override fun findCompanyWithJobId(jobId: Long): Company? {
+        return this.companyRepository.getCompanyByJobPostId(jobId)
+    }
+
 
 }

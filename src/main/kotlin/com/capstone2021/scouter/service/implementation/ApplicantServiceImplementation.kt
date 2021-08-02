@@ -2,8 +2,10 @@ package com.capstone2021.scouter.service.implementation
 
 import com.capstone2021.scouter.algorithms.Functions
 import com.capstone2021.scouter.model.Applicant
+import com.capstone2021.scouter.model.CompanyJobPosting
 import com.capstone2021.scouter.model.JobPosting
 import com.capstone2021.scouter.repository.ApplicantRepository
+import com.capstone2021.scouter.repository.CompanyRepository
 import com.capstone2021.scouter.repository.JobPostRepository
 import com.capstone2021.scouter.service.ApplicantService
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,6 +20,9 @@ class ApplicantServiceImplementation : ApplicantService {
 
     @Autowired
     lateinit var applicantRepository: ApplicantRepository
+
+    @Autowired
+    lateinit var  companyRepository:CompanyRepository
 
     @Autowired
     lateinit var jobRepository: JobPostRepository
@@ -42,9 +47,10 @@ class ApplicantServiceImplementation : ApplicantService {
         return applicantRepository.getSpecificApplicants(applicant1, applicant2)
     }
 
-    override fun getQualifiedJobs(applicant: Applicant):List<JobPosting>? {
+    override fun getQualifiedJobs(applicant: Applicant):MutableList<CompanyJobPosting>? {
         var allPostedJobs: MutableList<JobPosting> = jobRepository.findAll()
         var outputList = mutableListOf<JobPosting>()
+        var finalOutput: MutableList<CompanyJobPosting> = mutableListOf()
         System.out.println("Number of jobs: " +  allPostedJobs.count())
         var set: MutableList<Int> = mutableListOf()
 
@@ -73,8 +79,11 @@ class ApplicantServiceImplementation : ApplicantService {
                 set!!.add(jobCount)
             }
 
+            //Check education requirement
+
 
             if(!functions.matcher(job.getPosition().toString().lowercase(Locale.getDefault()), applicant.getProspectiveJob()?.getPosition())){
+
 //
 
                 System.out.println(functions.matcher(job.getPosition().toString().lowercase(Locale.getDefault()), applicant.getProspectiveJob()?.getPosition()))
@@ -115,10 +124,25 @@ class ApplicantServiceImplementation : ApplicantService {
                 subList.add(allPostedJobs[i])
             }
             outputList = allPostedJobs.minus(subList) as MutableList<JobPosting>
+
+
+            for( j in outputList){
+                System.out.println("Job Id: " + j.getId())
+                var company = j.getId()?.let { companyRepository.getCompanyByJobPostId(it) }
+                company?.removeAllJobPost()
+                var companyJobPost = CompanyJobPosting(company , j)
+
+                if(finalOutput.add(companyJobPost)){
+                    println("added")
+                }
+
+
+
+            }
         }
 
         System.out.println("Posted Job " + outputList.count())
-        return outputList
+        return finalOutput
 
     }
 

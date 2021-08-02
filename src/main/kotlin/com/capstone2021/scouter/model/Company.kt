@@ -168,6 +168,10 @@ class Company {
         jobPostings?.add(jobPosting)
     }
 
+    fun removeAllJobPost(){
+        jobPostings?.clear()
+    }
+
 
 
 

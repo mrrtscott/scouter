@@ -2,10 +2,7 @@ package com.capstone2021.scouter.controller
 
 import com.capstone2021.scouter.algorithms.CompareStrings
 import com.capstone2021.scouter.algorithms.Cosine
-import com.capstone2021.scouter.model.Applicant
-import com.capstone2021.scouter.model.Application
-import com.capstone2021.scouter.model.Company
-import com.capstone2021.scouter.model.JobPosting
+import com.capstone2021.scouter.model.*
 import com.capstone2021.scouter.service.ApplicantService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -54,8 +51,8 @@ class ApplicantController {
     }
 
     @GetMapping("/dashboard/{id}")
-    fun applicantDashboard(@PathVariable("id") id: Long?): List<JobPosting>?{
-        var jobPostings:List<JobPosting>? = null
+    fun applicantDashboard(@PathVariable("id") id: Long?): MutableList<CompanyJobPosting>?{
+        var jobPostings:MutableList<CompanyJobPosting>? = null
         var applicant = applicantService.findApplicant(id!!.toLong())
 
         if (applicant != null) {
@@ -63,6 +60,7 @@ class ApplicantController {
         }
 
         return jobPostings
+
 
 
     }

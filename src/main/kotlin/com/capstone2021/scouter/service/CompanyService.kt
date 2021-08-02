@@ -16,5 +16,7 @@ interface CompanyService {
 
     fun deleteById(id: Long)
 
+    fun findCompanyWithJobId(jobId: Long ): Company?
+
 
 }
