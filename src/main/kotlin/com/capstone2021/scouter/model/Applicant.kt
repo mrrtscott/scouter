@@ -149,7 +149,13 @@ class Applicant {
     }
 
     fun getSkillList(): List<String> {
-        return (skillProfile!!.split(","))
+        if(skillProfile != null){
+            return (skillProfile!!.split(","))
+        }
+        else {
+            return listOf()
+        }
+
 
     }
 

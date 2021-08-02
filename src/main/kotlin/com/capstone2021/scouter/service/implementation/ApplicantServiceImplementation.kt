@@ -48,8 +48,8 @@ class ApplicantServiceImplementation : ApplicantService {
 
 
         var jobCount = -1
+        var skillCount = 0
         for (job in allPostedJobs){
-            println("test")
             jobCount+=1
             if(functions.getAge(applicant.getDateOfBirth()) < job.getMinAge()!!.toInt()){
                     set!!.add(job)
@@ -74,7 +74,7 @@ class ApplicantServiceImplementation : ApplicantService {
                 set!!.add(job)
             }
 
-            var skillCount = 0
+
             var jobPostingSkills = job.getSkillRequirements()
 
             if (jobPostingSkills != null) {
