@@ -46,6 +46,7 @@ class ApplicantServiceImplementation : ApplicantService {
         var allPostedJobs: MutableList<JobPosting> = jobRepository.findAll()
 
         for (job in allPostedJobs){
+            println("test")
             if(functions.getAge(applicant.getDateOfBirth()) < job.getMinAge()!!.toInt()){
                 allPostedJobs.remove(job)
                 continue
