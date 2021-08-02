@@ -38,7 +38,11 @@ class Functions {
         var result1:Double = cosine.similarity(input1, input2)
         var result2: Int = compareStrings.calculate(input1.toString(), input2.toString())
 
+        System.out.println(input1 + " " + input2)
+        System.out.println(result1.toString() + " " + result1)
+
         return result1 >= 0.4 && result2 <= 60
+
 
     }
 

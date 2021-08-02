@@ -44,34 +44,44 @@ class ApplicantServiceImplementation : ApplicantService {
 
     override fun getQualifiedJobs(applicant: Applicant):List<JobPosting>? {
         var allPostedJobs: MutableList<JobPosting> = jobRepository.findAll()
-        var set: MutableSet<JobPosting>? = null
+        var outputList = mutableListOf<JobPosting>()
+        System.out.println("Number of jobs: " +  allPostedJobs.count())
+        var set: MutableList<Int> = mutableListOf()
 
 
         var jobCount = -1
-        var skillCount = 0
+
         for (job in allPostedJobs){
+            var skillCount = 0
             jobCount+=1
-            if(functions.getAge(applicant.getDateOfBirth()) < job.getMinAge()!!.toInt()){
-                    set!!.add(job)
+            System.out.println(job.getDescription())
+            if(functions.getAge(applicant.getDateOfBirth()) < (job.getMinAge() ?: 0)){
+                println("true: Age less")
+                set?.add(jobCount)
 
             }
-            if(functions.getAge(applicant.getDateOfBirth()) > job.getMaxAge()!!.toInt()){
-//                allPostedJobs.remove(job)
-//                continue
-                    set!!.add(job)
-            }
+            if(functions.getAge(applicant.getDateOfBirth()) > (job.getMaxAge() ?: 0)){
 
-            if(job.getBasicYearlySalary()!! < applicant.getProspectiveJob()?.getMinimumSalary()!!){
-//                allPostedJobs.remove(job)
-//                continue
-                    set!!.add(job)
+                System.out.println("true: Age more")
+                set?.add(jobCount)
             }
 
 
-            if(!functions.matcher(job.getPosition().toString().lowercase(Locale.getDefault()), applicant.getProspectiveJob().toString())){
-//                allPostedJobs.remove(job)
-//                continue
-                set!!.add(job)
+
+             if(job.getBasicYearlySalary()!!.toDouble() < applicant?.getProspectiveJob()?.getMinimumSalary()!!){
+                System.out.println("true: Minimum Salary " + job.getBasicYearlySalary()!! + " " + applicant.getProspectiveJob()?.getMinimumSalary()!!)
+                set!!.add(jobCount)
+            }
+
+
+            if(!functions.matcher(job.getPosition().toString().lowercase(Locale.getDefault()), applicant.getProspectiveJob()?.getPosition())){
+//
+
+                System.out.println(functions.matcher(job.getPosition().toString().lowercase(Locale.getDefault()), applicant.getProspectiveJob()?.getPosition()))
+                System.out.println("true: Job Position does not match")
+                set?.add(jobCount)
+
+
             }
 
 
@@ -88,10 +98,10 @@ class ApplicantServiceImplementation : ApplicantService {
                 }
 
             }
-            println(skillCount)
+            System.out.println("Skill Count" + skillCount)
 
             if (skillCount == 0){
-                set!!.add(job)
+                set?.add(jobCount)
 
             }
 
@@ -99,11 +109,16 @@ class ApplicantServiceImplementation : ApplicantService {
         }
 
         if (set != null) {
-            allPostedJobs.removeAll(set)
+            var distinct:List<Int> = set.toSet().toList()
+            var subList:MutableList<JobPosting> = mutableListOf()
+            for(i in distinct){
+                subList.add(allPostedJobs[i])
+            }
+            outputList = allPostedJobs.minus(subList) as MutableList<JobPosting>
         }
 
-
-        return allPostedJobs
+        System.out.println("Posted Job " + outputList.count())
+        return outputList
 
     }
 
