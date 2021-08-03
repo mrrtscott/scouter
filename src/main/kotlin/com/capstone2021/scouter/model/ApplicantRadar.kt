@@ -12,5 +12,17 @@ class ApplicantRadar {
         this.numberOfEducationAttainment = numberOfEducationAttainment
     }
 
+    fun getApplicant(): Applicant?{
+        return this.applicant
+    }
+
+    fun getNumberOfSkillsMatched(): Int?{
+        return this.numberOfSkillsMatched
+    }
+
+    fun getNumberOfEducationAttainment(): Int?{
+        return this.numberOfEducationAttainment
+    }
+
 
 }
