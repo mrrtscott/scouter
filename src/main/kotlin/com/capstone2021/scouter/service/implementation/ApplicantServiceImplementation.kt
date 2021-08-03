@@ -2,6 +2,7 @@ package com.capstone2021.scouter.service.implementation
 
 import com.capstone2021.scouter.algorithms.Functions
 import com.capstone2021.scouter.model.Applicant
+import com.capstone2021.scouter.model.ApplicantRadar
 import com.capstone2021.scouter.model.CompanyJobPosting
 import com.capstone2021.scouter.model.JobPosting
 import com.capstone2021.scouter.repository.ApplicantRepository
@@ -144,6 +145,23 @@ class ApplicantServiceImplementation : ApplicantService {
         System.out.println("Posted Job " + outputList.count())
         return finalOutput
 
+    }
+
+    override fun getTwoApplicantsWithSkill(
+        applicant1: Long,
+        applicant2: Long,
+        skill: Long
+    ): MutableList<ApplicantRadar> {
+        var subResult:MutableList<ApplicantRadar> = mutableListOf()
+        var primer = applicantRepository.getSpecificApplicants(applicant1, applicant2)
+        for (each in primer){
+            var cumulativeJobExperience = 0
+            var numberOfSkillsMatched = 0
+            var numberOfEducationAttainment = 0
+
+
+        }
+        return mutableListOf<ApplicantRadar>()
     }
 
 }

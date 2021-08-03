@@ -1,6 +1,11 @@
 package com.capstone2021.scouter.algorithms
 
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.*
+import kotlin.math.abs
 
 
 class Functions {
@@ -41,9 +46,31 @@ class Functions {
         System.out.println(input1 + " " + input2)
         System.out.println(result1.toString() + " " + result1)
 
-        return result1 >= 0.4 && result2 <= 60
+        return result1 >= 0.31 && result2 <= 60
 
 
+    }
+
+    fun monthsBetween(d1: Date?, d2: Date?): Int {
+        val today = LocalDateTime.now(ZoneId.of("America/Jamaica"))
+        var date1 = d1
+        var date2 = d2
+
+
+        if (date2 == null) {
+            date2 = java.sql.Timestamp.valueOf(today)
+        }
+        if(date1 == null){
+            date1 = java.sql.Timestamp.valueOf(today)
+        }
+
+
+        val m_calendar = Calendar.getInstance()
+        m_calendar.time = date1
+        val nMonth1 = 12 * m_calendar[Calendar.YEAR] + m_calendar[Calendar.MONTH]
+        m_calendar.time = date2
+        val nMonth2 = 12 * m_calendar[Calendar.YEAR] + m_calendar[Calendar.MONTH]
+        return abs(nMonth2 - nMonth1)
     }
 
 

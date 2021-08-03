@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull
 import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
+import kotlin.jvm.Transient
 
 
 @Entity
@@ -68,6 +69,10 @@ class Applicant {
 
     @UpdateTimestamp
     private var updatedAt: Date? = null
+
+
+
+
 
 
 
