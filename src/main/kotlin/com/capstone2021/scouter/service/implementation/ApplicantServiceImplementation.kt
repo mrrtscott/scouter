@@ -152,18 +152,46 @@ class ApplicantServiceImplementation : ApplicantService {
         applicant2: Long,
         job: Long
     ): MutableList<ApplicantRadar> {
-
-        var subResult:MutableList<ApplicantRadar> = mutableListOf()
-        var primer = applicantRepository.getSpecificApplicants(applicant1, applicant2)
-        for (each in primer){
+        var activeJob = jobRepository.findById(job).get()
+        var result:MutableList<ApplicantRadar> = mutableListOf()
+        var applicantList = applicantRepository.getSpecificApplicants(applicant1, applicant2)
+        for (eachApplicant in applicantList){
             var cumulativeJobExperience = 0
             var numberOfSkillsMatched = 0
             var numberOfEducationAttainment = 0
 
+            var jobSkill = activeJob.getSkillRequirements()
+
+            //Calculating how many skills matched
+            if (jobSkill != null) {
+                for (skill in jobSkill){
+                    for (applicantSkill in eachApplicant.getSkillList()){
+                        if(functions.matcher(skill.getSkill(), applicantSkill)){
+                            numberOfSkillsMatched+=1
+                        }
+                    }
+
+                }
+
+            }
+
+            numberOfEducationAttainment = eachApplicant.getEductionProfile()?.getListOfEducation()?.count()!!.toInt()
+
+            var jobExperiences = eachApplicant.getEmploymentProfile()?.getListOfEmployment()
+            if (jobExperiences != null) {
+                for(jobExperience in jobExperiences){
+                    cumulativeJobExperience+=functions.monthsBetween(jobExperience.getEmploymentStartDate(), jobExperience.getEmploymentEndDate())
+                }
+            }
+
+            var applicantRadar = ApplicantRadar(eachApplicant,numberOfSkillsMatched, numberOfEducationAttainment)
+            result.add(applicantRadar)
+
+
 
 
         }
-        return mutableListOf<ApplicantRadar>()
+        return result
     }
 
 }

@@ -66,14 +66,16 @@ class ApplicantController {
 
     }
 
+    @GetMapping("/skillCompare")
+    fun viewApplicantsJob(@RequestParam(name = "applicant1" ) applicant1:Long, @RequestParam(name = "applicant2")applicant2: Long, @RequestParam(name = "job") job: Long): MutableList<ApplicantRadar>{
+        return applicantService.getTwoApplicantsWithJob(applicant1, applicant2, job)
+    }
+
+    //FOR TESTING ONLY
     @GetMapping("/word")
     fun viewJobsQualifiedFor(@RequestParam(name = "word1") word1: String?,@RequestParam(name = "word2") word2: String? ):Double{
         var compareStrings = CompareStrings()
         var cosine = Cosine()
-
-        //Should be greater than 0.40
-        //return cosine.similarity(word1.toString(), word2.toString())
-
 
         return (compareStrings.calculate(word1.toString(), word2.toString())).toDouble()
 
