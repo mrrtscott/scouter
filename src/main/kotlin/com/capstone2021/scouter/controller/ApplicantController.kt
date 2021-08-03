@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/applicant")
 class ApplicantController {
@@ -49,6 +49,7 @@ class ApplicantController {
         output = applicantService.getTwoApplicant(applicant1, applicant2)
         return output
     }
+
 
     @GetMapping("/dashboard/{id}")
     fun applicantDashboard(@PathVariable("id") id: Long?): MutableList<CompanyJobPosting>?{

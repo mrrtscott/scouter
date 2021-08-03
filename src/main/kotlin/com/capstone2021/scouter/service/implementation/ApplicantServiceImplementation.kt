@@ -147,17 +147,19 @@ class ApplicantServiceImplementation : ApplicantService {
 
     }
 
-    override fun getTwoApplicantsWithSkill(
+    override fun getTwoApplicantsWithJob(
         applicant1: Long,
         applicant2: Long,
-        skill: Long
+        job: Long
     ): MutableList<ApplicantRadar> {
+
         var subResult:MutableList<ApplicantRadar> = mutableListOf()
         var primer = applicantRepository.getSpecificApplicants(applicant1, applicant2)
         for (each in primer){
             var cumulativeJobExperience = 0
             var numberOfSkillsMatched = 0
             var numberOfEducationAttainment = 0
+
 
 
         }

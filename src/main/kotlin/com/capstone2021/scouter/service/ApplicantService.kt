@@ -19,7 +19,7 @@ interface ApplicantService {
 
     fun getQualifiedJobs(applicant: Applicant):MutableList<CompanyJobPosting>?
 
-    fun getTwoApplicantsWithSkill(applicant1: Long, applicant2: Long, skill:Long): MutableList<ApplicantRadar>
+    fun getTwoApplicantsWithJob(applicant1: Long, applicant2: Long, job:Long): MutableList<ApplicantRadar>
 
 
 
