@@ -11,4 +11,10 @@ interface ApplicationService {
     fun findAllApplications(): List<Application>
 
     fun findApplicationsPerApplicant(applicantId: Long):List<Application>
+
+    fun findApplicationPerApplicant(job: Long, status: Any): List<Any>
+
+    fun findApplicationAll(job:Long):List<Any>
+
+    fun findApplication(id: Long):Application?
 }

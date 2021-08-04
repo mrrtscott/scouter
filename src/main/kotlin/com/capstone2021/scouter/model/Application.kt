@@ -56,6 +56,7 @@ class Application {
         return this.score
     }
 
+    //4707804
     fun getStatus(): ApplicationStatus?{
         return this.status
     }

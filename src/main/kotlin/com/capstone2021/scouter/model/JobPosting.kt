@@ -58,9 +58,13 @@ class JobPosting {
     @Enumerated(EnumType.STRING)
     private var jobPostingStatus: JobPostingStatus? = null
 
-
-    private var stages:String? = null
-
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinTable(
+        name = "jobPosting_stages",
+        joinColumns = [javax.persistence.JoinColumn(name = "jobPosting_id", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "stages_id", referencedColumnName = "id")]
+    )
+    private var stages:List<InterviewStages>? = null
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -114,11 +118,15 @@ class JobPosting {
         return this.skillRequirements
     }
 
-    fun getStages():List<String?>{
+//    fun getStages():List<String?>{
+//
+//        return if (this.stages != null) this!!.stages!!.split(",") else {
+//            return listOf()
+//        }
+//    }
 
-        return if (this.stages != null) this!!.stages!!.split(",") else {
-            return listOf()
-        }
+    fun getStages(): List<InterviewStages>?{
+        return this.stages
     }
 
     fun getUpdatedAt(): Date?{
@@ -190,8 +198,7 @@ class JobPosting {
         educationRequirements: List<EducationRequirement>?,
         employmentRequirements: List<EmploymentRequirement>?,
         skillRequirements: List<SkillRequirements>?,
-        stages: String,
-        jobPostingStatus: JobPostingStatus?
+        stages: List<InterviewStages>,
     ) {
         this.description = description
         this.position = position
@@ -204,7 +211,7 @@ class JobPosting {
         this.employmentRequirements = employmentRequirements
         this.skillRequirements = skillRequirements
         this.stages = stages
-        this.jobPostingStatus = jobPostingStatus
+        this.jobPostingStatus = JobPostingStatus.POSTED
     }
 
 

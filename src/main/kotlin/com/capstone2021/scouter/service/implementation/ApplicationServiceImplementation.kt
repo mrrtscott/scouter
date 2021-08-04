@@ -7,6 +7,7 @@ import com.capstone2021.scouter.repository.ApplicantRepository
 import com.capstone2021.scouter.repository.ApplicationRepository
 import com.capstone2021.scouter.service.ApplicationService
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class ApplicationServiceImplementation: ApplicationService {
@@ -28,6 +29,18 @@ class ApplicationServiceImplementation: ApplicationService {
 
     override fun findApplicationsPerApplicant(applicantId: Long): List<Application> {
         return this.applicationRepository.getApplicationsForApplicant(applicantId)
+    }
+
+    override fun findApplicationPerApplicant(job: Long, status: Any): List<Any> {
+       return this.applicationRepository.getApplicantsPerJob(job, status)
+    }
+
+    override fun findApplicationAll(job: Long): List<Any> {
+        return this.applicationRepository.getApplicantsPerJobAll(job)
+    }
+
+    override fun findApplication(id: Long): Application? {
+        return this.applicationRepository.getById(id)
     }
 
 
