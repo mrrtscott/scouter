@@ -37,10 +37,11 @@ class ApplicationController {
         var activeApplicant = applicantRepository.getById(applicantId)
 
         var company: Company = companyRepository.getById(companyId)
-        var application = Application()
+
         var job = jobPostRepository.getById(jobPostId)
-        application.setApplicant(activeApplicant)
-        application.setJob(job)
+        var application = Application(job, activeApplicant)
+//        application.setApplicant(activeApplicant)
+//        application.setJob(job)
 
         applicationRepository.save(application)
 

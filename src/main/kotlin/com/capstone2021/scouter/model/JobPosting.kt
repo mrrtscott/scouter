@@ -58,6 +58,10 @@ class JobPosting {
     @Enumerated(EnumType.STRING)
     private var jobPostingStatus: JobPostingStatus? = null
 
+
+    private var stages:String? = null
+
+
     @CreationTimestamp
     @Column(updatable = false)
     private var createdAt: LocalDateTime? = LocalDateTime.now()
@@ -110,6 +114,13 @@ class JobPosting {
         return this.skillRequirements
     }
 
+    fun getStages():List<String?>{
+
+        return if (this.stages != null) this!!.stages!!.split(",") else {
+            return listOf()
+        }
+    }
+
     fun getUpdatedAt(): Date?{
         return this.updatedAt
     }
@@ -117,6 +128,8 @@ class JobPosting {
     fun getCreatedAt(): LocalDateTime?{
         return this.createdAt
     }
+
+
 
 
 
@@ -177,6 +190,7 @@ class JobPosting {
         educationRequirements: List<EducationRequirement>?,
         employmentRequirements: List<EmploymentRequirement>?,
         skillRequirements: List<SkillRequirements>?,
+        stages: String,
         jobPostingStatus: JobPostingStatus?
     ) {
         this.description = description
@@ -189,6 +203,7 @@ class JobPosting {
         this.educationRequirements = educationRequirements
         this.employmentRequirements = employmentRequirements
         this.skillRequirements = skillRequirements
+        this.stages = stages
         this.jobPostingStatus = jobPostingStatus
     }
 

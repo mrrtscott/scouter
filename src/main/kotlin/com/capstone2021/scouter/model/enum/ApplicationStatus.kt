@@ -2,5 +2,8 @@ package com.capstone2021.scouter.model.enum
 
 enum class ApplicationStatus {
 
-    DRAFT
+    DRAFT,
+    OPEN,
+    REVIEWED,
+    CLOSED
 }
