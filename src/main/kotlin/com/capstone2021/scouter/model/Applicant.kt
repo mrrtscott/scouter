@@ -63,6 +63,16 @@ class Applicant {
 
     private var skillProfile: String? = null
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinTable(
+        name = "applicant_documents",
+        joinColumns = [javax.persistence.JoinColumn(name = "applicantId", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "documents_id", referencedColumnName = "id")]
+    )
+    private var documents: List<Documents>?= null
+
+    private var photoUrl: String? = null
+
     @CreationTimestamp
     @Column(updatable = false)
     private var createdAt: LocalDateTime? = LocalDateTime.now()
@@ -87,7 +97,9 @@ class Applicant {
         employmentProfile: EmploymentProfile?,
         eductionProfile: EducationProfile?,
         prospectiveJob:ProspectiveJob?,
-        skillProfile: String?
+        skillProfile: String?,
+        documents:List<Documents>,
+        photoUrl: String?
     ) {
         this.firstName = firstName
         this.middleName = middleName
@@ -101,6 +113,8 @@ class Applicant {
         this.eductionProfile = eductionProfile
         this.prospectiveJob = prospectiveJob
         this.skillProfile = skillProfile
+        this.documents = documents
+        this.photoUrl = photoUrl
     }
 
 

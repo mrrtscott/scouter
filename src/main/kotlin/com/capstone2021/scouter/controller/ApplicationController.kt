@@ -65,9 +65,23 @@ class ApplicationController {
     }
 
     @GetMapping("/get-applicants-per-job")
-    fun findApplicantsPerJob(@RequestParam(name = "job" ) job:Long, @RequestParam(name = "status")status:String): List<String> {
-        return if (status == "ALL") return this.applicationRepository.getApplicantsPerJobAll(job)   else {
-            return this.applicationRepository.getApplicantsPerJob(job, status)
+    fun findApplicantsPerJob(@RequestParam(name = "job" ) job:Long, @RequestParam(name = "status")status:String): List<Applicant> {
+        var allApplicantId= this.applicationRepository.getApplicantsPerJobAll(job)
+        var specificApplicantId = this.applicationRepository.getApplicantsPerJob(job, status)
+
+        var allApplicantList = mutableListOf<Applicant>()
+        for (id in allApplicantId){
+            allApplicantList.add(applicantRepository.getById(id))
+        }
+
+        var specificApplicantsList = mutableListOf<Applicant>()
+        for (id in specificApplicantId){
+            specificApplicantsList.add(applicantRepository.getById(id))
+        }
+
+
+        return if (status == "ALL") return allApplicantList   else {
+            return specificApplicantsList
         }
 
     }

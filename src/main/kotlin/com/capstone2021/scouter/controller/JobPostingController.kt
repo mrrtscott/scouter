@@ -25,6 +25,7 @@ class JobPostingController {
         return this.jobPostingService.findAll()
     }
 
+    @CrossOrigin
     @PostMapping (value = ["/{companyId}"])
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@PathVariable("companyId") companyId: Long, @RequestBody jobPosting: JobPosting){
