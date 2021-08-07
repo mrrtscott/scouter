@@ -1,7 +1,7 @@
 package com.capstone2021.scouter.algorithms
 
-import java.time.Instant
-import java.time.LocalDate
+import org.apache.http.entity.ContentType.*
+import org.springframework.web.multipart.MultipartFile
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
@@ -71,6 +71,27 @@ class Functions {
         m_calendar.time = date2
         val nMonth2 = 12 * m_calendar[Calendar.YEAR] + m_calendar[Calendar.MONTH]
         return abs(nMonth2 - nMonth1)
+    }
+
+     fun isImage(file: MultipartFile) {
+        check(
+            Arrays.asList(
+                IMAGE_JPEG.getMimeType(),
+                IMAGE_PNG.getMimeType(),
+                IMAGE_GIF.getMimeType()
+            ).contains(file.contentType)
+        ) { "File must be an image [" + file.contentType + "]" }
+    }
+
+     fun isFileEmpty(file: MultipartFile) {
+        check(!file.isEmpty) { "Cannot upload empty file [ " + file.size + "]" }
+    }
+
+     fun extractMetadata(file: MultipartFile): Map<String?, String?> {
+        val metadata: MutableMap<String?, String?> = HashMap()
+        metadata["Content-Type"] = file.contentType
+        metadata["Content-Length"] = file.size.toString()
+        return metadata
     }
 
 

@@ -4,6 +4,7 @@ import com.capstone2021.scouter.model.Applicant
 import com.capstone2021.scouter.model.ApplicantRadar
 import com.capstone2021.scouter.model.CompanyJobPosting
 import com.capstone2021.scouter.model.JobPosting
+import org.springframework.web.multipart.MultipartFile
 
 interface ApplicantService {
 
@@ -20,6 +21,8 @@ interface ApplicantService {
     fun getQualifiedJobs(applicant: Applicant):MutableList<CompanyJobPosting>?
 
     fun getTwoApplicantsWithJob(applicant1: Long, applicant2: Long, job:Long): MutableList<ApplicantRadar>
+
+    fun addProfileImage(applicant: Long, file: MultipartFile)
 
 
 

@@ -1,6 +1,7 @@
 package com.capstone2021.scouter.model
 
 import com.capstone2021.scouter.model.enum.EmploymentType
+import com.fasterxml.jackson.annotation.JsonFormat
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.util.*
@@ -46,10 +47,12 @@ class Employment {
         return this.employmentType
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     fun getEmploymentStartDate(): Date?{
         return this.employmentStartDate
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     fun getEmploymentEndDate(): Date?{
         return this.employmentEndDate
     }

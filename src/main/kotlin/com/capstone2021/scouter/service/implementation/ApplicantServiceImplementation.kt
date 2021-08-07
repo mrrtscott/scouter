@@ -5,12 +5,15 @@ import com.capstone2021.scouter.model.Applicant
 import com.capstone2021.scouter.model.ApplicantRadar
 import com.capstone2021.scouter.model.CompanyJobPosting
 import com.capstone2021.scouter.model.JobPosting
+import com.capstone2021.scouter.model.enum.BucketName
 import com.capstone2021.scouter.repository.ApplicantRepository
 import com.capstone2021.scouter.repository.CompanyRepository
 import com.capstone2021.scouter.repository.JobPostRepository
 import com.capstone2021.scouter.service.ApplicantService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.web.multipart.MultipartFile
+import java.io.IOException
 import java.util.*
 
 
@@ -27,6 +30,9 @@ class ApplicantServiceImplementation : ApplicantService {
 
     @Autowired
     lateinit var jobRepository: JobPostRepository
+
+    @Autowired
+    lateinit var fileStorage: FileStorageImplementationService
 
     override fun saveApplicant(applicant: Applicant) {
         applicantRepository.save(applicant)
@@ -193,5 +199,24 @@ class ApplicantServiceImplementation : ApplicantService {
         }
         return result
     }
+
+    override fun addProfileImage(applicant: Long, file: MultipartFile) {
+        functions.isFileEmpty(file)
+        functions.isImage(file)
+        var activeApplicant = applicantRepository.getById(applicant)
+        var metadata: Map<String?, String?> = functions.extractMetadata(file)
+        var path = java.lang.String.format("%s/%s", BucketName.DOCUMENTS_AWS.bucketName, activeApplicant.getId())
+        val filename = java.lang.String.format("%s-%s", UUID.randomUUID(), file.originalFilename)
+
+        try {
+            fileStorage.save(path, filename, Optional.of(metadata), file.inputStream)
+            activeApplicant.setPhotoUrl(filename)
+            applicantRepository.save(activeApplicant)
+        } catch (e: IOException) {
+            throw IllegalStateException(e)
+        }
+
+    }
+
 
 }

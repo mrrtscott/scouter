@@ -1,5 +1,6 @@
 package com.capstone2021.scouter.model
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import org.jetbrains.annotations.NotNull
@@ -127,10 +128,11 @@ class Company {
         this.taxRegistrationNumber = trn
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     fun getCreatedAt(): LocalDateTime?{
         return this.createdAt
     }
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     fun getUpdatedAt(): LocalDateTime?{
         return this.updatedAt
     }
@@ -146,7 +148,7 @@ class Company {
     fun getIsPublicCompany(): Boolean?{
         return this.isPublicCompany
     }
-
+    @JsonFormat(pattern="yyyy-MM-dd")
     fun getCompanyEstablishedDate(): Date?{
         return this.companyEstablishedDate
     }

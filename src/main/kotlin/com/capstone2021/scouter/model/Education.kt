@@ -1,5 +1,6 @@
 package com.capstone2021.scouter.model
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import java.util.*
 import javax.persistence.*
 
@@ -54,10 +55,12 @@ class Education {
         return this.attainment
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     fun getStartDate(): Date?{
         return this.startDate
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     fun getEndDate(): Date?{
         return this.endDate
     }

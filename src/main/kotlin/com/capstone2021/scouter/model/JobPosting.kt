@@ -2,6 +2,7 @@ package com.capstone2021.scouter.model
 
 import com.capstone2021.scouter.model.enum.EmploymentType
 import com.capstone2021.scouter.model.enum.JobPostingStatus
+import com.fasterxml.jackson.annotation.JsonFormat
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
@@ -118,21 +119,17 @@ class JobPosting {
         return this.skillRequirements
     }
 
-//    fun getStages():List<String?>{
-//
-//        return if (this.stages != null) this!!.stages!!.split(",") else {
-//            return listOf()
-//        }
-//    }
 
     fun getStages(): List<InterviewStages>?{
         return this.stages
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     fun getUpdatedAt(): Date?{
         return this.updatedAt
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     fun getCreatedAt(): LocalDateTime?{
         return this.createdAt
     }

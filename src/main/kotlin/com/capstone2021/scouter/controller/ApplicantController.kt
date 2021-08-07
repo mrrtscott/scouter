@@ -6,7 +6,9 @@ import com.capstone2021.scouter.model.*
 import com.capstone2021.scouter.service.ApplicantService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 
 @CrossOrigin
 @RestController
@@ -23,6 +25,25 @@ class ApplicantController {
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody applicant:Applicant){
         return applicantService.saveApplicant(applicant)
+    }
+
+    @PostMapping(
+        path = ["/{applicantId}/profile-image"],
+        consumes = [MediaType.MULTIPART_FORM_DATA_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    fun uploadUserProfileImage(@PathVariable("applicantId") applicantId: Long?, @RequestParam("file") file: MultipartFile?) {
+        if (file == null){
+            println("file null")
+        }
+        if (applicantId != null) {
+            if (file != null) {
+                applicantService.addProfileImage(applicantId, file)
+            }
+        }
+
+
+
     }
 
     @GetMapping

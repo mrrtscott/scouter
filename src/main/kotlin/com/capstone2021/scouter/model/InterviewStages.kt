@@ -1,5 +1,6 @@
 package com.capstone2021.scouter.model
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.awt.print.Book
@@ -62,10 +63,12 @@ class InterviewStages {
         return this.stageDescription
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     fun getCreatedAt(): Date?{
         return this.createdAt
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     fun getUpdatedAt(): Date?{
         return this.updatedAt
     }

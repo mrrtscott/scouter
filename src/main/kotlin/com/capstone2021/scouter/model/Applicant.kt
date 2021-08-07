@@ -1,6 +1,7 @@
 package com.capstone2021.scouter.model
 
 import com.capstone2021.scouter.model.enum.ApplicantStatus
+import com.fasterxml.jackson.annotation.JsonFormat
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import org.jetbrains.annotations.NotNull
@@ -84,8 +85,6 @@ class Applicant {
 
 
 
-
-
     constructor(
         firstName: String?,
         middleName: String?,
@@ -135,6 +134,7 @@ class Applicant {
         return this.lastName
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     fun getDateOfBirth(): Date?{
         return this.dateOfBirth
     }
@@ -178,11 +178,12 @@ class Applicant {
 
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     fun getCreatedAt(): LocalDateTime?{
         return this.createdAt
     }
 
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     fun getUpdatedAt(): Date?{
         return this.updatedAt
     }
@@ -224,6 +225,10 @@ class Applicant {
 
     fun setEductionProfile(eductionProfile: EducationProfile?){
         this.eductionProfile = eductionProfile
+    }
+
+    fun setPhotoUrl(url: String?){
+        this.photoUrl = url
     }
 
 
