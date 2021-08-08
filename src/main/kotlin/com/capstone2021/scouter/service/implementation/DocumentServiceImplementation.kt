@@ -52,7 +52,7 @@ class DocumentServiceImplementation : DocumentService {
         val filename = java.lang.String.format("%s-%s", UUID.randomUUID(), file.originalFilename)
 
 
-        var document = Documents(file.originalFilename.toString(), filename)
+        var document = Documents(file.originalFilename.toString(), path,filename)
         var application = applicationRepository.getById(applicationId)
 
         application.addDocuments(document)

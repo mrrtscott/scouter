@@ -63,6 +63,10 @@ class InterviewStages {
         return this.stageDescription
     }
 
+    fun getComponent(): List<StageComponent>? {
+        return this.stageComponent
+    }
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     fun getCreatedAt(): Date?{
         return this.createdAt

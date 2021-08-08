@@ -6,14 +6,15 @@ import com.capstone2021.scouter.model.JobPosting
 import com.capstone2021.scouter.repository.ApplicantRepository
 import com.capstone2021.scouter.repository.ApplicationRepository
 import com.capstone2021.scouter.service.ApplicationService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
 class ApplicationServiceImplementation: ApplicationService {
 
-    lateinit var applicantRepository: ApplicantRepository
 
+    @Autowired
     lateinit var applicationRepository: ApplicationRepository
 
     override fun saveApplication(applicant: Applicant, jobPosting: JobPosting) {
