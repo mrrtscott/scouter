@@ -8,6 +8,8 @@ interface ApplicationService {
 
     fun saveApplication(applicant: Applicant, jobPosting: JobPosting)
 
+    fun save(application: Application)
+
     fun findAllApplications(): List<Application>
 
     fun findApplicationsPerApplicant(applicantId: Long):List<Application>
@@ -17,4 +19,6 @@ interface ApplicationService {
     fun findApplicationAll(job:Long):List<Any>
 
     fun findApplication(id: Long):Application?
+
+
 }

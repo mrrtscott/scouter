@@ -86,6 +86,16 @@ class ApplicationController {
 
     }
 
+    @GetMapping("/get-details/{applicationId}")
+    fun getApplicationInfo(@PathVariable("applicationId") applicationId: Long): MutableList<Any?> {
+        var activeApplication = applicationRepository.getById(applicationId)
+        var jobId = activeApplication.getJob()?.getId()
+        var activeCompany = jobId?.let { companyRepository.getCompanyByJobPostId(it) }
+
+        return mutableListOf(activeCompany, activeApplication)
+
+    }
+
 
 
 }

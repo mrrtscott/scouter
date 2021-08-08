@@ -33,9 +33,6 @@ class ApplicantController {
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun uploadUserProfileImage(@PathVariable("applicantId") applicantId: Long?, @RequestParam("file") file: MultipartFile?) {
-        if (file == null){
-            println("file null")
-        }
         if (applicantId != null) {
             if (file != null) {
                 applicantService.addProfileImage(applicantId, file)
@@ -74,7 +71,7 @@ class ApplicantController {
 
     @GetMapping("/dashboard/{id}")
     fun applicantDashboard(@PathVariable("id") id: Long?): MutableList<CompanyJobPosting>?{
-        var jobPostings:MutableList<CompanyJobPosting>? = null
+        var jobPostings:MutableList<CompanyJobPosting>? = mutableListOf()
         var applicant = applicantService.findApplicant(id!!.toLong())
 
         if (applicant != null) {

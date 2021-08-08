@@ -23,6 +23,10 @@ class ApplicationServiceImplementation: ApplicationService {
         applicationRepository.save(application)
     }
 
+    override fun save(application: Application) {
+        applicationRepository.save(application)
+    }
+
     override fun findAllApplications(): List<Application> {
         return this.applicationRepository.findAll()
     }

@@ -15,8 +15,6 @@ class Documents {
 
     private var name: String? = null
 
-    private var description: String? = null
-
     private var url: String? = null
 
     @CreationTimestamp
@@ -27,9 +25,8 @@ class Documents {
     private var updatedAt: Date? = null
 
 
-    constructor(name: String?, description: String?, url: String?) {
+    constructor(name: String?, url: String?) {
         this.name = name
-        this.description = description
         this.url = url
     }
 
@@ -42,9 +39,6 @@ class Documents {
         return this.name
     }
 
-    fun getDescription(): String?{
-        return this.description
-    }
 
     fun getUrl(): String?{
         return this.url

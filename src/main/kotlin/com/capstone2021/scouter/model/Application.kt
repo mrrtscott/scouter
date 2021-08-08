@@ -34,6 +34,14 @@ class Application {
     )
     private var documents: MutableList<Documents>? = null
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinTable(
+        name = "application_enquiry",
+        joinColumns = [javax.persistence.JoinColumn(name = "application_id", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "enquiry_id", referencedColumnName = "id")]
+    )
+    private var enquiry: MutableList<Enquiry>? = null
+
     private var currentStage: String? = null
 
     private var score: Double? = null
@@ -74,6 +82,10 @@ class Application {
         return this.status
     }
 
+    fun getEnquiry():MutableList<Enquiry>?{
+        return this.enquiry
+    }
+
     fun getCurrentStage(): String?{
         return this.currentStage
     }
@@ -106,6 +118,10 @@ class Application {
     fun addDocuments(document: Documents){
         documents?.add(document)
 
+    }
+
+    fun addEnquiry(enquiry: Enquiry){
+        this.enquiry?.add(enquiry)
     }
 
 
