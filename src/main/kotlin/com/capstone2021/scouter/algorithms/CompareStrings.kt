@@ -9,7 +9,7 @@ class CompareStrings {
         return if (a == b) 0 else 1
     }
 
-    //
+    //Return the smallest value in the stream or return the
     private fun min(vararg numbers: Int): Int {
         return Arrays.stream(numbers)
             .min().orElse(Int.MAX_VALUE)
