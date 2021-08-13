@@ -22,6 +22,8 @@ interface ApplicantService {
 
     fun getTwoApplicantsWithJob(applicant1: Long, applicant2: Long, job:Long): MutableList<ApplicantRadar>
 
+    fun getEachApplicantPerJob(job: Long, status: String): MutableList<ApplicantRadar>
+
     fun addProfileImage(applicant: Long, file: MultipartFile)
 
 

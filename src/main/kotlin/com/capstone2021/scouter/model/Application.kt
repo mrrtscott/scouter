@@ -120,6 +120,15 @@ class Application {
 
     }
 
+
+    fun setStatus(status: ApplicationStatus){
+        this.status = status
+    }
+
+    fun setScore(score: Double){
+        this.score = score
+    }
+
     fun addEnquiry(enquiry: Enquiry){
         this.enquiry?.add(enquiry)
     }

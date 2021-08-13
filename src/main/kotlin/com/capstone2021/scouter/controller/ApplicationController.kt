@@ -1,10 +1,12 @@
 package com.capstone2021.scouter.controller
 
 import com.capstone2021.scouter.model.*
+import com.capstone2021.scouter.model.enum.ApplicationStatus
 import com.capstone2021.scouter.repository.ApplicantRepository
 import com.capstone2021.scouter.repository.ApplicationRepository
 import com.capstone2021.scouter.repository.CompanyRepository
 import com.capstone2021.scouter.repository.JobPostRepository
+import com.capstone2021.scouter.service.ApplicantService
 import com.capstone2021.scouter.service.ApplicationService
 import com.capstone2021.scouter.service.FileStorageService
 import org.springframework.beans.factory.annotation.Autowired
@@ -35,6 +37,9 @@ class ApplicationController {
 
     @Autowired
     lateinit var applicationService: ApplicationService
+
+    @Autowired
+    lateinit var applicantService: ApplicantService
 
     @Autowired
     lateinit var fileStorageService: FileStorageService
@@ -74,24 +79,8 @@ class ApplicationController {
     }
 
     @GetMapping("/get-applicants-per-job")
-    fun findApplicantsPerJob(@RequestParam(name = "job" ) job:Long, @RequestParam(name = "status")status:String): List<Applicant> {
-        var allApplicantId= this.applicationRepository.getApplicantsPerJobAll(job)
-        var specificApplicantId = this.applicationRepository.getApplicantsPerJob(job, status)
-
-        var allApplicantList = mutableListOf<Applicant>()
-        for (id in allApplicantId){
-            allApplicantList.add(applicantRepository.getById(id))
-        }
-
-        var specificApplicantsList = mutableListOf<Applicant>()
-        for (id in specificApplicantId){
-            specificApplicantsList.add(applicantRepository.getById(id))
-        }
-
-
-        return if (status == "ALL") return allApplicantList   else {
-            return specificApplicantsList
-        }
+    fun findApplicantsPerJob(@RequestParam(name = "job" ) job:Long, @RequestParam(name = "status")status:String): List<Any> {
+      return this.applicantService.getEachApplicantPerJob(job, status)
 
     }
 
@@ -141,6 +130,29 @@ class ApplicationController {
             applicationService.save(activeApplication)
         }
 
+    }
+
+
+    @PostMapping("/{applicationId}/set-status")
+    fun changeStatus(
+        @PathVariable("applicationId") applicationId: Long,
+        @RequestParam(name = "status") status: ApplicationStatus
+    ) {
+        applicationService.findApplication(applicationId)?.setStatus(status)
+    }
+
+    @PostMapping("/{applicationId}/set-score")
+    fun changeScore(
+        @PathVariable("applicationId") applicationId: Long,
+        @RequestParam(name = "score") score: Double
+    ) {
+        applicationService.findApplication(applicationId)?.setScore(score)
+    }
+
+
+    @GetMapping("/selected-applicants/{jobId}")
+    fun getSelectedApplicants(@PathVariable("jobId") jobId: Long): List<Any>{
+        return this.applicationService.findSelectedApplicants(jobId)
     }
 
 

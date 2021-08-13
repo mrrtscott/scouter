@@ -4,16 +4,18 @@ import java.util.*
 
 class CompareStrings {
 
+    //helper function to return a the cost of the substitutation of two charaters in a string
     private fun costOfSubstitution(a: Char, b: Char): Int {
         return if (a == b) 0 else 1
     }
 
+    //
     private fun min(vararg numbers: Int): Int {
         return Arrays.stream(numbers)
             .min().orElse(Int.MAX_VALUE)
     }
 
-    //Levenshtein
+    //Levenshtein Alrorithim to compare Strings
     fun calculate(x: String, y: String): Int {
         val dp = Array(x.length + 1) { IntArray(y.length + 1) }
         for (i in 0..x.length) {

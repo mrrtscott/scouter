@@ -7,6 +7,7 @@ import com.capstone2021.scouter.model.CompanyJobPosting
 import com.capstone2021.scouter.model.JobPosting
 import com.capstone2021.scouter.model.enum.BucketName
 import com.capstone2021.scouter.repository.ApplicantRepository
+import com.capstone2021.scouter.repository.ApplicationRepository
 import com.capstone2021.scouter.repository.CompanyRepository
 import com.capstone2021.scouter.repository.JobPostRepository
 import com.capstone2021.scouter.service.ApplicantService
@@ -33,6 +34,9 @@ class ApplicantServiceImplementation : ApplicantService {
 
     @Autowired
     lateinit var fileStorage: FileStorageImplementationService
+
+    @Autowired
+    lateinit var applicationRepository: ApplicationRepository
 
     override fun saveApplicant(applicant: Applicant) {
         applicantRepository.save(applicant)
@@ -190,7 +194,8 @@ class ApplicantServiceImplementation : ApplicantService {
                 }
             }
 
-            var applicantRadar = ApplicantRadar(eachApplicant,numberOfSkillsMatched, numberOfEducationAttainment)
+
+            var applicantRadar = ApplicantRadar(eachApplicant,numberOfSkillsMatched, numberOfEducationAttainment, cumulativeJobExperience)
             result.add(applicantRadar)
 
 
@@ -199,6 +204,100 @@ class ApplicantServiceImplementation : ApplicantService {
         }
         return result
     }
+
+    override fun getEachApplicantPerJob(job: Long, status: String): MutableList<ApplicantRadar> {
+        var allApplicantId= this.applicationRepository.getApplicantsPerJobAll(job)
+        var activeJob = this.jobRepository.getById(job)
+        var specificApplicantId = this.applicationRepository.getApplicantsPerJob(job, status)
+        var allApplicantList = mutableListOf<Applicant>()
+        for (id in allApplicantId){
+            allApplicantList.add(applicantRepository.getById(id))
+        }
+
+        var specificApplicantsList = mutableListOf<Applicant>()
+        for (id in specificApplicantId){
+            specificApplicantsList.add(applicantRepository.getById(id))
+        }
+
+//        return if (status == "ALL") return allApplicantList   else {
+//            return specificApplicantsList
+//        }
+        var result:MutableList<ApplicantRadar> = mutableListOf()
+        if (status == "ALL"){
+            for (eachApplicant in allApplicantList){
+                var cumulativeJobExperience = 0
+                var numberOfSkillsMatched = 0
+                var numberOfEducationAttainment = 0
+
+                var jobSkill = activeJob.getSkillRequirements()
+
+                //Calculating how many skills matched
+                if (jobSkill != null) {
+                    for (skill in jobSkill){
+                        for (applicantSkill in eachApplicant.getSkillList()){
+                            if(functions.matcher(skill.getSkill(), applicantSkill)){
+                                numberOfSkillsMatched+=1
+                            }
+                        }
+
+                    }
+
+                }
+
+                numberOfEducationAttainment = eachApplicant.getEductionProfile()?.getListOfEducation()?.count()!!.toInt()
+                var jobExperiences = eachApplicant.getEmploymentProfile()?.getListOfEmployment()
+                if (jobExperiences != null) {
+                    for(jobExperience in jobExperiences){
+                        cumulativeJobExperience+=functions.monthsBetween(jobExperience.getEmploymentStartDate(), jobExperience.getEmploymentEndDate())
+                    }
+                }
+
+                var applicantRadar = ApplicantRadar(eachApplicant,numberOfSkillsMatched, numberOfEducationAttainment, cumulativeJobExperience)
+                result.add(applicantRadar)
+            }
+        }
+        else {
+
+            for (eachApplicant in specificApplicantsList){
+                var cumulativeJobExperience = 0
+                var numberOfSkillsMatched = 0
+                var numberOfEducationAttainment = 0
+
+                var jobSkill = activeJob.getSkillRequirements()
+
+                //Calculating how many skills matched
+                if (jobSkill != null) {
+                    for (skill in jobSkill){
+                        for (applicantSkill in eachApplicant.getSkillList()){
+                            if(functions.matcher(skill.getSkill(), applicantSkill)){
+                                numberOfSkillsMatched+=1
+                            }
+                        }
+
+                    }
+
+                }
+
+                numberOfEducationAttainment = eachApplicant.getEductionProfile()?.getListOfEducation()?.count()!!.toInt()
+                var jobExperiences = eachApplicant.getEmploymentProfile()?.getListOfEmployment()
+                if (jobExperiences != null) {
+                    for(jobExperience in jobExperiences){
+                        cumulativeJobExperience+=functions.monthsBetween(jobExperience.getEmploymentStartDate(), jobExperience.getEmploymentEndDate())
+                    }
+                }
+
+                var applicantRadar = ApplicantRadar(eachApplicant,numberOfSkillsMatched, numberOfEducationAttainment, cumulativeJobExperience)
+                result.add(applicantRadar)
+            }
+
+        }
+
+
+        return result
+
+        }
+
+
 
     override fun addProfileImage(applicant: Long, file: MultipartFile) {
         functions.isFileEmpty(file)

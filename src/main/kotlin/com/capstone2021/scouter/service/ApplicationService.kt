@@ -20,5 +20,7 @@ interface ApplicationService {
 
     fun findApplication(id: Long):Application?
 
+    fun findSelectedApplicants(job: Long): List<Any>
+
 
 }

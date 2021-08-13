@@ -5,5 +5,6 @@ enum class ApplicationStatus {
     DRAFT,
     OPEN,
     REVIEWED,
-    CLOSED
+    CLOSED,
+    SELECTED
 }

@@ -48,5 +48,17 @@ class ApplicationServiceImplementation: ApplicationService {
         return this.applicationRepository.getById(id)
     }
 
+    override fun findSelectedApplicants(job: Long): List<Any> {
+        var selectedApplicant = mutableListOf<Applicant>()
+        var selectedApplications = applicationRepository.getSelectedApplicant(job)
+        for (applications in selectedApplications){
+            if(applications.getJob()?.getId() == job){
+                applications.getApplicant()?.let { selectedApplicant.add(it) }
+            }
+        }
+
+        return selectedApplicant
+    }
+
 
 }

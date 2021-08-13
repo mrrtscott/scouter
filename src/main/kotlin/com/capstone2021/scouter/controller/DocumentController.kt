@@ -10,6 +10,7 @@ import java.util.*
 
 
 @RestController
+@CrossOrigin
 @RequestMapping("/document")
 class DocumentController {
 

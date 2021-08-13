@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.capstone2021</groupId>
 	<artifactId>scouter</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.3-SNAPSHOT</version>
 	<name>scouter</name>
 	<description>HRM recruitment system</description>
 	<properties>
