@@ -39,6 +39,7 @@ class Functions {
         return age
     }
 
+    //Function to see if a user;s profile falls within a threshold to be match with a job
     fun matcher(input1:String?, input2:String?): Boolean{
         var result1:Double = cosine.similarity(input1, input2)
         var result2: Int = compareStrings.calculate(input1.toString(), input2.toString())
@@ -51,6 +52,7 @@ class Functions {
 
     }
 
+    //Set current date and time
     fun monthsBetween(d1: Date?, d2: Date?): Int {
         val today = LocalDateTime.now(ZoneId.of("America/Jamaica"))
         var date1 = d1
@@ -73,6 +75,7 @@ class Functions {
         return abs(nMonth2 - nMonth1)
     }
 
+    //Check to ensure uploaded file is an image
      fun isImage(file: MultipartFile) {
         check(
             Arrays.asList(
@@ -83,10 +86,12 @@ class Functions {
         ) { "File must be an image [" + file.contentType + "]" }
     }
 
+     //Check if file was uploaded
      fun isFileEmpty(file: MultipartFile) {
         check(!file.isEmpty) { "Cannot upload empty file [ " + file.size + "]" }
     }
 
+    //Retrieve file type and size from upload
      fun extractMetadata(file: MultipartFile): Map<String?, String?> {
         val metadata: MutableMap<String?, String?> = HashMap()
         metadata["Content-Type"] = file.contentType

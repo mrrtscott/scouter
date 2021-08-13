@@ -8,7 +8,10 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
-
+/**
+ * This class is responsible for the Amazon S3 Bucket Services
+ * @return AmazonS3ClientBuilder
+ */
 @Configuration
 class AmazonConfig {
     @Bean

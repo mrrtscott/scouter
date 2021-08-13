@@ -20,13 +20,6 @@ interface ApplicationRepository: JpaRepository<Application, Long> {
     @Query(value = "SELECT applicant.id FROM applicant WHERE applicant.id IN(SELECT applicant.id FROM application WHERE application.job_post_id = :jobPostId)",nativeQuery = true)
     fun getApplicantsPerJobAll(jobPostId: Long):List<Long>
 
-//    @Query(value = "SELECT a FROM Applicant a INNER JOIN Application ap WHERE ap.job.id = ?1 AND ap.status = ?2")
-//    fun getApplicantsPerJobAll(jobPostId: Long): List<Applicant>
-//
-//
-//    @Query(value = "SELECT a FROM Applicant a INNER JOIN Application ap WHERE ap.job.id = ?1")
-//    fun getApplicantsPerJob(jobPostId: Long, status:Any): List<Applicant>
-
     @Query("SELECT * FROM application WHERE application.status = 'SELECTED'", nativeQuery = true)
     fun getSelectedApplicant(jobPostId: Long):List<Application>
 }
